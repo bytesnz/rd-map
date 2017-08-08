@@ -1,0 +1,67 @@
+$logoHeight: 54px;
+$headerVPadding: 10px;
+$headerHPadding: 20px;
+
+:export {
+  rdLime: #88bd23;
+  rdGreen: #007e31;
+  rdBaby: #01b5e5;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+}
+
+header {
+  padding: $headerVPadding $headerHPadding;
+
+  > div {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  > .logo {
+    background: url('assets/logo.png');
+    width: 52px;
+    height: 54px;
+  }
+
+  >.logo-text {
+    background: url('assets/logo-text.png');
+    float: right;
+    width: 301px;
+    height: 54px;
+  }
+}
+
+div.coords {
+  color: #999;
+  font-size: 80%;
+
+  p {
+    margin: 0
+  }
+}
+
+#mapContainer {
+  //height: calc(100% - $logoHeight = (2 * $headerVPadding));
+  height: calc(100% - 74px);
+  position: relative;
+
+  #map, .leaflet-container {
+    height: 100%;
+  }
+
+  #buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}

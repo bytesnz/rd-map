@@ -1,0 +1,35 @@
+{
+  "name": "reef-doctor-map",
+  "version": "1.0.0",
+  "description": "Temporary maps for Reef Doctor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack -w"
+  },
+  "author": "Jack Farley <bytesnz>",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "magellan-coords": "^1.1.0"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.2.2",
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^2.0.0",
+    "html-webpack-plugin": "^2.30.1",
+    "magellan-coords": "^1.1.0",
+    "postcss-loader": "^1.2.2",
+    "postcss-smart-import": "^0.6.7",
+    "precss": "^1.4.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-leaflet": "^1.4.0",
+    "react-leaflet-draw": "^0.16.0",
+    "sass-loader": "^6.0.6",
+    "source-map-loader": "^0.2.1",
+    "style-loader": "0.13.1",
+    "ts-loader": "^2.3.2",
+    "url-loader": "^0.5.7",
+    "webpack": "^2.2.0"
+  }
+}

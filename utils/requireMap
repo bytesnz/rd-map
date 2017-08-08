@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for f in `ls $1`; do
+  file=`basename "$f"`
+  name=`echo ${file%.*} | tr '-' '_'`
+
+  echo "export const $name = require('$f');"
+done
