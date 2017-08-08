@@ -6,24 +6,9 @@ import { Map, TileLayer, Marker, Popup, Polygon, Polyline, Tooltip } from 'react
 
 import * as sites from './sites';
 import * as icons from './icons';
+import * as lang from './lang';
 
-const defaultLanguage = 'en';
-
-const getLangString = (...strings) => {
-  let i;
-
-  for (i = 0; i < strings.length;  i++) {
-    if (strings[i]) {
-      if (typeof strings[i] === 'string') {
-        return strings[i];
-      }
-      if (strings[i][defaultLanguage]) {
-        return strings[i][defaultLanguage];
-      }
-    }
-  }
-};
-
+lang.setDefaultLang('en');
 
 let clickId = 1;
 
@@ -89,12 +74,12 @@ export class RDMap extends React.Component {
 
                     markers.push((
                       <Marker key={`${i}:${j}:${l}`} position={coordinate.coordinates} icon={icons.chooseIcon(sites[siteKeys[i]], coordinate)}>
-                        <Tooltip><span>{getLangString(coordinate.label, loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
+                        <Tooltip><span>{lang.getLangString(coordinate.label, loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
                         <Popup>
                           <div>
-                            <h1>{getLangString(coordinate.label, loc.label, sites[siteKeys[i]].name)}</h1>
+                            <h1>{lang.getLangString(coordinate.label, loc.label, sites[siteKeys[i]].name)}</h1>
                             <CoordsElement coords={coordinate.coordinates} />
-                            <p>{getLangString(coordinate.description, loc.description)}</p>
+                            <p>{lang.getLangString(coordinate.description, loc.description)}</p>
                           </div>
                         </Popup>
                       </Marker>
@@ -110,15 +95,15 @@ export class RDMap extends React.Component {
               case 'point':
                 markers.push((
                   <Marker key={`${i}:${j}`} position={loc.coordinates} icon={icons.chooseIcon(sites[siteKeys[i]], loc)}>
-                    <Tooltip><span>{getLangString(loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
+                    <Tooltip><span>{lang.getLangString(loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
                     <Popup>
                       <div>
                         <h1>
-                          {getLangString(loc.label, sites[siteKeys[i]].name)}
+                          {lang.getLangString(loc.label, sites[siteKeys[i]].name)}
                           {icons.createIcons(sites[siteKeys[i]])}
                         </h1>
                         <CoordsElement coords={loc.coordinates} />
-                        <p>{getLangString(loc.description, sites[siteKeys[i]].description)}</p>
+                        <p>{lang.getLangString(loc.description, sites[siteKeys[i]].description)}</p>
                       </div>
                     </Popup>
                   </Marker>
@@ -127,14 +112,14 @@ export class RDMap extends React.Component {
               case 'poly':
                 markers.push((
                   <Polygon key={`${i}:${j}`} positions={processCoordinates(loc.coordinates)}>
-                    <Tooltip><span>{getLangString(loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
+                    <Tooltip><span>{lang.getLangString(loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
                     <Popup>
                       <div>
                         <h1>
-                          {getLangString(loc.label, sites[siteKeys[i]].name)}
+                          {lang.getLangString(loc.label, sites[siteKeys[i]].name)}
                           {icons.createIcons(sites[siteKeys[i]])}
                         </h1>
-                        <p>{getLangString(loc.description, sites[siteKeys[i]].description)}</p>
+                        <p>{lang.getLangString(loc.description, sites[siteKeys[i]].description)}</p>
                       </div>
                     </Popup>
                   </Polygon>
@@ -143,14 +128,14 @@ export class RDMap extends React.Component {
               case 'line':
                 markers.push((
                   <Polyline key={`${i}:${j}`} positions={processCoordinates(loc.coordinates)}>
-                    <Tooltip><span>{getLangString(loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
+                    <Tooltip><span>{lang.getLangString(loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
                     <Popup>
                       <div>
                         <h1>
-                          {getLangString(loc.label, sites[siteKeys[i]].name)}
+                          {lang.getLangString(loc.label, sites[siteKeys[i]].name)}
                           {icons.createIcons(sites[siteKeys[i]])}
                         </h1>
-                        <p>{getLangString(loc.description, sites[siteKeys[i]].description)}</p>
+                        <p>{lang.getLangString(loc.description, sites[siteKeys[i]].description)}</p>
                       </div>
                     </Popup>
                   </Polyline>

@@ -69,7 +69,14 @@ export const uvc = Leaflet.icon({
   iconSize: [15, 19],
   iconAnchor: [7.5, 9.5],
   popupAnchor: [0, -9.5]
-});
+})
+
+export const mpa = Leaflet.icon({
+  iconUrl: require('../assets/mpa.svg'),
+  iconSize: [16, 19],
+  iconAnchor: [8, 9.5],
+  popupAnchor: [0, -9.5]
+});;
 
 export const fishing = Leaflet.icon({
   iconUrl: require('../assets/fishing.svg'),
@@ -80,7 +87,7 @@ export const fishing = Leaflet.icon({
 
 const tagIcons = {
   'uvc': uvc,
-  'mpa': uvc,
+  'mpa': mpa,
   'fishing-ground': fishing,
   'dive-site': dive,
   'evac-point': evac,
