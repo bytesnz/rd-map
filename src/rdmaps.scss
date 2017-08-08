@@ -28,16 +28,16 @@ header {
   }
 
   > .logo {
-    background: url('assets/logo.png');
-    width: 52px;
+    background: url('assets/logo.svg') 0 0 / 54px 54px no-repeat;
+    width: 54px;
     height: 54px;
   }
 
-  >.logo-text {
-    background: url('assets/logo-text.png');
+  > .logo-text {
+    background: url('assets/logo-text.svg') no-repeat;
     float: right;
-    width: 301px;
-    height: 54px;
+    width: 318px;
+    height: 52px;
   }
 }
 
@@ -47,6 +47,15 @@ div.coords {
 
   p {
     margin: 0
+  }
+}
+
+.icons {
+  img {
+    max-width: 15px;
+    max-height: 15px;
+    display: inline-block;
+    margin-left: 5px;
   }
 }
 
@@ -63,5 +72,26 @@ div.coords {
     position: absolute;
     top: 0;
     right: 0;
+  }
+}
+
+@media(max-width: 500px) {
+  header {
+    padding: $headerVPadding/2 $headerHPadding/2;
+
+    > .logo-text {
+      display: none;
+    }
+
+    > .logo {
+      background-size: 30px 30px;
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  #mapContainer {
+    //height: calc(100% - $logoHeight = (2 * $headerVPadding));
+    height: calc(100% - 40px);
   }
 }

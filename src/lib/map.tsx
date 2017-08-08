@@ -1,23 +1,11 @@
-/*TS1.5+ declare module "*.svg" {
-  const value: any;
-  export = value;
-}*/
-declare function require(string): string;
-
 import * as React from 'react';
 
 import * as coords from 'magellan-coords';
 
-import { Map, TileLayer, Marker, Popup, Polygon, Tooltip } from 'react-leaflet';
-import * as Leaflet from 'leaflet';
+import { Map, TileLayer, Marker, Popup, Polygon, Polyline, Tooltip } from 'react-leaflet';
 
 import * as sites from './sites';
-
-//import buoySvg from '../assets/buoy.svg';
-
-Object.keys(sites).forEach((site) => {
-  console.log(site);
-});
+import * as icons from './icons';
 
 const defaultLanguage = 'en';
 
@@ -26,6 +14,9 @@ const getLangString = (...strings) => {
 
   for (i = 0; i < strings.length;  i++) {
     if (strings[i]) {
+      if (typeof strings[i] === 'string') {
+        return strings[i];
+      }
       if (strings[i][defaultLanguage]) {
         return strings[i][defaultLanguage];
       }
@@ -33,27 +24,6 @@ const getLangString = (...strings) => {
   }
 };
 
-const buoyIcon = Leaflet.icon({
-  iconUrl: require('../assets/buoy.svg'),
-  iconSize: [19, 19],
-  iconAnchor: [9.5, 9.5],
-  popupAnchor: [0, -9.5]
-});
-
-const diveIcon = Leaflet.icon({
-  iconUrl: require('../assets/dive.svg'),
-  iconSize: [15, 10],
-  iconAnchor: [7.5, 5],
-  popupAnchor: [0, -5]
-});
-
-const rdIcon = Leaflet.icon({
-  iconUrl: require('../assets/rd.png'),
-  iconSize: [19, 19],
-  iconAnchor: [9.5, 9.5],
-  popupAnchor: [0, -9.5]
-
-});
 
 let clickId = 1;
 
@@ -107,56 +77,85 @@ export class RDMap extends React.Component {
 
             const loc = sites[siteKeys[i]].locations[j];
 
+            const processCoordinates = (coordinates) => {
+              let poly = [];
+
+              coordinates.forEach((coordinate, l) => {
+                if (coordinate instanceof Array) {
+                  poly.push(coordinate);
+                } else {
+                  if (coordinate.type === 'point') {
+                    poly.push(coordinate.coordinates);
+
+                    markers.push((
+                      <Marker key={`${i}:${j}:${l}`} position={coordinate.coordinates} icon={icons.chooseIcon(sites[siteKeys[i]], coordinate)}>
+                        <Tooltip><span>{getLangString(coordinate.label, loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
+                        <Popup>
+                          <div>
+                            <h1>{getLangString(coordinate.label, loc.label, sites[siteKeys[i]].name)}</h1>
+                            <CoordsElement coords={coordinate.coordinates} />
+                            <p>{getLangString(coordinate.description, loc.description)}</p>
+                          </div>
+                        </Popup>
+                      </Marker>
+                    ));
+                  }
+                }
+              });
+
+              return poly;
+            };
+
             switch (loc.type) {
               case 'point':
                 markers.push((
-                  <Marker key={`${i}:${j}`} position={loc.coordinates} icon={loc.icon === 'rd' ? rdIcon : diveIcon}>
+                  <Marker key={`${i}:${j}`} position={loc.coordinates} icon={icons.chooseIcon(sites[siteKeys[i]], loc)}>
                     <Tooltip><span>{getLangString(loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
                     <Popup>
                       <div>
-                        <h1>{getLangString(loc.label, sites[siteKeys[i]].name)}</h1>
+                        <h1>
+                          {getLangString(loc.label, sites[siteKeys[i]].name)}
+                          {icons.createIcons(sites[siteKeys[i]])}
+                        </h1>
                         <CoordsElement coords={loc.coordinates} />
+                        <p>{getLangString(loc.description, sites[siteKeys[i]].description)}</p>
                       </div>
                     </Popup>
                   </Marker>
                 ));
                 break;
               case 'poly':
-                let poly = [];
-
-                loc.coordinates.forEach((coordinate, l) => {
-                  if (coordinate instanceof Array) {
-                    poly.push(coordinate);
-                  } else {
-                    if (coordinate.type === 'point') {
-                      poly.push(coordinate.coordinates);
-
-                      markers.push((
-                        <Marker key={`${i}:${j}:${l}`} position={coordinate.coordinates} icon={coordinate.icon === 'rd' ? rdIcon : buoyIcon}>
-                          <Tooltip><span>{getLangString(coordinate.label, loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
-                          <Popup>
-                            <div>
-                              <h1>{getLangString(coordinate.label, loc.label, sites[siteKeys[i]].name)}</h1>
-                              <CoordsElement coords={coordinate.coordinates} />
-                            </div>
-                          </Popup>
-                        </Marker>
-                      ));
-                    }
-                  }
-                });
-
                 markers.push((
-                  <Polygon key={`${i}:${j}`} positions={poly}>
+                  <Polygon key={`${i}:${j}`} positions={processCoordinates(loc.coordinates)}>
                     <Tooltip><span>{getLangString(loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
                     <Popup>
                       <div>
-                        <h1>{getLangString(loc.label, sites[siteKeys[i]].name)}</h1>
+                        <h1>
+                          {getLangString(loc.label, sites[siteKeys[i]].name)}
+                          {icons.createIcons(sites[siteKeys[i]])}
+                        </h1>
+                        <p>{getLangString(loc.description, sites[siteKeys[i]].description)}</p>
                       </div>
                     </Popup>
                   </Polygon>
                 ));
-
+                break;
+              case 'line':
+                markers.push((
+                  <Polyline key={`${i}:${j}`} positions={processCoordinates(loc.coordinates)}>
+                    <Tooltip><span>{getLangString(loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
+                    <Popup>
+                      <div>
+                        <h1>
+                          {getLangString(loc.label, sites[siteKeys[i]].name)}
+                          {icons.createIcons(sites[siteKeys[i]])}
+                        </h1>
+                        <p>{getLangString(loc.description, sites[siteKeys[i]].description)}</p>
+                      </div>
+                    </Popup>
+                  </Polyline>
+                ));
+                break;
 
             }
 
