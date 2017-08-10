@@ -100,7 +100,7 @@ export class RDMap extends React.Component {
                       <div>
                         <h1>
                           {lang.getLangString(loc.label, sites[siteKeys[i]].name)}
-                          {icons.createIcons(sites[siteKeys[i]])}
+                          {icons.createIcons(sites[siteKeys[i]], loc)}
                         </h1>
                         <CoordsElement coords={loc.coordinates} />
                         <p>{lang.getLangString(loc.description, sites[siteKeys[i]].description)}</p>
@@ -117,7 +117,7 @@ export class RDMap extends React.Component {
                       <div>
                         <h1>
                           {lang.getLangString(loc.label, sites[siteKeys[i]].name)}
-                          {icons.createIcons(sites[siteKeys[i]])}
+                          {icons.createIcons(sites[siteKeys[i]], loc)}
                         </h1>
                         <p>{lang.getLangString(loc.description, sites[siteKeys[i]].description)}</p>
                       </div>
@@ -133,7 +133,7 @@ export class RDMap extends React.Component {
                       <div>
                         <h1>
                           {lang.getLangString(loc.label, sites[siteKeys[i]].name)}
-                          {icons.createIcons(sites[siteKeys[i]])}
+                          {icons.createIcons(sites[siteKeys[i]], loc)}
                         </h1>
                         <p>{lang.getLangString(loc.description, sites[siteKeys[i]].description)}</p>
                       </div>

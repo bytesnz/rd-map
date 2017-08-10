@@ -8,6 +8,8 @@ declare function require(string): string;
 
 const iconPriority = [
   'uvc',
+  'uvc-survey',
+  'ff-survey',
   'mpa',
   'fishing-ground',
   'dive-site',
@@ -87,6 +89,8 @@ export const fishing = Leaflet.icon({
 
 const tagIcons = {
   'uvc': uvc,
+  'uvc-survey': uvc,
+  'ff-survey': uvc,
   'mpa': mpa,
   'fishing-ground': fishing,
   'dive-site': dive,
@@ -111,8 +115,16 @@ export const chooseIcon = (site, point?) => {
     icon = site.icon;
   } else {
     let i;
+    if (point && point.tags) {
+      for (i = 0; i < iconPriority.length; i++) {
+        if (point.tags.indexOf(iconPriority[i]) !== -1) {
+          return tagIcons[iconPriority[i]];
+        }
+      }
+    }
+
     for (i = 0; i < iconPriority.length; i++) {
-      if (site.type.indexOf(iconPriority[i]) !== -1) {
+      if (site.tags.indexOf(iconPriority[i]) !== -1) {
         return tagIcons[iconPriority[i]];
       }
     }
@@ -143,11 +155,14 @@ export const chooseIcon = (site, point?) => {
  *
  * @returns React component
  */
-export const createIcons = (site) => {
+export const createIcons = (site, point?) => {
   let icons = [];
 
   iconPriority.forEach((tag) => {
-    if (site.type.indexOf(tag) !== -1) {
+    if (point && point.tags && point.tags.indexOf(tag) !== -1) {
+      icons.push(<img src={tagIcons[tag].options.iconUrl} title={tags.tagToString(tag)} key={tag} />);
+    }
+    if (site.tags.indexOf(tag) !== -1) {
       icons.push(<img src={tagIcons[tag].options.iconUrl} title={tags.tagToString(tag)} key={tag} />);
     }
   });
