@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack -w"
+    "dev": "webpack -w",
+    "prod": "webpack -p"
   },
   "author": "Jack Farley <bytesnz>",
   "license": "GPL-3.0",

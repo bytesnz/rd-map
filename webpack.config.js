@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/index.tsx',
   output: {
     path: './dist',
-    filename: 'app.jsx',
+    filename: 'app.js',
   },
   devtool: 'source-map',
   resolve: {
