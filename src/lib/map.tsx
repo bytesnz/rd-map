@@ -8,6 +8,8 @@ import * as sites from './sites';
 import * as icons from './icons';
 import * as lang from './lang';
 
+import { MarkdownPreview } from 'react-marked-markdown';
+
 lang.setDefaultLang('en');
 
 let clickId = 1;
@@ -51,6 +53,77 @@ export class RDMap extends React.Component {
           let i = 0;
           let j = 0;
           let done = false;
+
+          const createMapElement = (key: string, element, labels: lang.LangString[], properties: LocationProperties = {}) => {
+            if (element.properties) {
+              if (element.properties.label) {
+                labels.unshift(element.properties.label);
+              }
+              properties = {
+                ...properties,
+                ...element.properties
+              };
+            }
+
+            switch (element.type) {
+              case 'FeatureCollection':
+                element.features.forEach((feature, index) => createMapElement(`${key}:${index}`, feature, labels, properties));
+                break;
+              case 'Feature':
+                createMapElement(key, element.geometry, labels, properties);
+                break;
+              case 'Point':
+                markers.push((
+                  <Marker key={key} position={element.coordinates} icon={icons.chooseIcon(sites[siteKeys[i]], properties)}>
+                    <Tooltip><span>{lang.getLangString(properties.label, sites[siteKeys[i]].name)}</span></Tooltip>
+                    <Popup>
+                      <div>
+                        <h1>
+                          {lang.getLangString(properties.label, sites[siteKeys[i]].name)}
+                          {icons.createIcons(sites[siteKeys[i]], properties)}
+                        </h1>
+                        <CoordsElement coords={element.coordinates} />
+                        <MarkdownPreview value={lang.getLangString(properties.description, sites[siteKeys[i]].description)} />
+                      </div>
+                    </Popup>
+                  </Marker>
+                ));
+                break;
+              case 'Polygon':
+                markers.push((
+                  <Polygon key={key} positions={element.coordinates}>
+                    <Tooltip><span>{lang.getLangString(properties.label, sites[siteKeys[i]].name)}</span></Tooltip>
+                    <Popup>
+                      <div>
+                        <h1>
+                          {lang.getLangString(properties.label, sites[siteKeys[i]].name)}
+                          {icons.createIcons(sites[siteKeys[i]], properties)}
+                        </h1>
+                        <MarkdownPreview value={lang.getLangString(properties.description, sites[siteKeys[i]].description)} />
+                      </div>
+                    </Popup>
+                  </Polygon>
+                ));
+                break;
+              case 'LineString':
+                markers.push((
+                  <Polyline key={key} positions={element.coordinates}>
+                    <Tooltip><span>{lang.getLangString(properties.label, sites[siteKeys[i]].name)}</span></Tooltip>
+                    <Popup>
+                      <div>
+                        <h1>
+                          {lang.getLangString(properties.label, sites[siteKeys[i]].name)}
+                          {icons.createIcons(sites[siteKeys[i]], properties)}
+                        </h1>
+                        <MarkdownPreview value={lang.getLangString(properties.description, sites[siteKeys[i]].description)} />
+                      </div>
+                    </Popup>
+                  </Polyline>
+                ));
+                break;
+            }
+          };
+
           while (!done) {
             if (!sites[siteKeys[i]].locations || j >= sites[siteKeys[i]].locations.length) {
               i++;
@@ -60,89 +133,11 @@ export class RDMap extends React.Component {
               return markers;
             }
 
-            const loc = sites[siteKeys[i]].locations[j];
+            const site = sites[siteKeys[i]];
+            const loc = site.locations[j];
+            const labels = [loc.label, site.name];
 
-            const processCoordinates = (coordinates) => {
-              let poly = [];
-
-              coordinates.forEach((coordinate, l) => {
-                if (coordinate instanceof Array) {
-                  poly.push(coordinate);
-                } else {
-                  if (coordinate.type === 'point') {
-                    poly.push(coordinate.coordinates);
-
-                    markers.push((
-                      <Marker key={`${i}:${j}:${l}`} position={coordinate.coordinates} icon={icons.chooseIcon(sites[siteKeys[i]], coordinate)}>
-                        <Tooltip><span>{lang.getLangString(coordinate.label, loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
-                        <Popup>
-                          <div>
-                            <h1>{lang.getLangString(coordinate.label, loc.label, sites[siteKeys[i]].name)}</h1>
-                            <CoordsElement coords={coordinate.coordinates} />
-                            <p>{lang.getLangString(coordinate.description, loc.description)}</p>
-                          </div>
-                        </Popup>
-                      </Marker>
-                    ));
-                  }
-                }
-              });
-
-              return poly;
-            };
-
-            switch (loc.type) {
-              case 'point':
-                markers.push((
-                  <Marker key={`${i}:${j}`} position={loc.coordinates} icon={icons.chooseIcon(sites[siteKeys[i]], loc)}>
-                    <Tooltip><span>{lang.getLangString(loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
-                    <Popup>
-                      <div>
-                        <h1>
-                          {lang.getLangString(loc.label, sites[siteKeys[i]].name)}
-                          {icons.createIcons(sites[siteKeys[i]], loc)}
-                        </h1>
-                        <CoordsElement coords={loc.coordinates} />
-                        <p>{lang.getLangString(loc.description, sites[siteKeys[i]].description)}</p>
-                      </div>
-                    </Popup>
-                  </Marker>
-                ));
-                break;
-              case 'poly':
-                markers.push((
-                  <Polygon key={`${i}:${j}`} positions={processCoordinates(loc.coordinates)}>
-                    <Tooltip><span>{lang.getLangString(loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
-                    <Popup>
-                      <div>
-                        <h1>
-                          {lang.getLangString(loc.label, sites[siteKeys[i]].name)}
-                          {icons.createIcons(sites[siteKeys[i]], loc)}
-                        </h1>
-                        <p>{lang.getLangString(loc.description, sites[siteKeys[i]].description)}</p>
-                      </div>
-                    </Popup>
-                  </Polygon>
-                ));
-                break;
-              case 'line':
-                markers.push((
-                  <Polyline key={`${i}:${j}`} positions={processCoordinates(loc.coordinates)}>
-                    <Tooltip><span>{lang.getLangString(loc.label, sites[siteKeys[i]].name)}</span></Tooltip>
-                    <Popup>
-                      <div>
-                        <h1>
-                          {lang.getLangString(loc.label, sites[siteKeys[i]].name)}
-                          {icons.createIcons(sites[siteKeys[i]], loc)}
-                        </h1>
-                        <p>{lang.getLangString(loc.description, sites[siteKeys[i]].description)}</p>
-                      </div>
-                    </Popup>
-                  </Polyline>
-                ));
-                break;
-
-            }
+            createMapElement(`${i}:${j}`, loc, labels);
 
             j++;
           }

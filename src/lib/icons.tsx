@@ -7,6 +7,8 @@ import * as tags from './tag';
 declare function require(string): string;
 
 const iconPriority = [
+  'coral-table',
+  'coral-structure',
   'uvc',
   'uvc-survey',
   'ff-survey',
@@ -87,10 +89,28 @@ export const fishing = Leaflet.icon({
   popupAnchor: [0, -10]
 });
 
+export const binoculars = Leaflet.icon({
+  iconUrl: require('../assets/binoculars.svg'),
+  iconSize: [20, 14],
+  iconAnchor: [10, 7],
+  popupAnchor: [0, -7]
+});
+
+export const coral = Leaflet.icon({
+  iconUrl: require('../assets/coral.svg'),
+  iconSize: [20, 20],
+  iconAnchor: [10, 10],
+  popupAnchor: [0, -10]
+});
+
 const tagIcons = {
   'uvc': uvc,
+  'coral-table': coral,
+  'coral-structure': coral,
+  'coral': coral,
   'uvc-survey': uvc,
   'ff-survey': uvc,
+  'landmark': binoculars,
   'mpa': mpa,
   'fishing-ground': fishing,
   'dive-site': dive,
@@ -123,14 +143,20 @@ export const chooseIcon = (site, point?) => {
       }
     }
 
-    for (i = 0; i < iconPriority.length; i++) {
-      if (site.tags.indexOf(iconPriority[i]) !== -1) {
-        return tagIcons[iconPriority[i]];
+    if (site.tags) {
+      for (i = 0; i < iconPriority.length; i++) {
+        if (site.tags.indexOf(iconPriority[i]) !== -1) {
+          return tagIcons[iconPriority[i]];
+        }
       }
     }
   }
 
   switch (icon) {
+    case 'landmark':
+      return binoculars;
+    case 'table':
+      return table;
     case 'rd':
       return rd;
     case 'buoy':
@@ -162,7 +188,7 @@ export const createIcons = (site, point?) => {
     if (point && point.tags && point.tags.indexOf(tag) !== -1) {
       icons.push(<img src={tagIcons[tag].options.iconUrl} title={tags.tagToString(tag)} key={tag} />);
     }
-    if (site.tags.indexOf(tag) !== -1) {
+    if (site.tags && site.tags.indexOf(tag) !== -1) {
       icons.push(<img src={tagIcons[tag].options.iconUrl} title={tags.tagToString(tag)} key={tag} />);
     }
   });
