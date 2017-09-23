@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import * as coords from 'magellan-coords';
 
+import { LocationProperties } from '../typings/locationProperties';
+
 import { Map, TileLayer, Marker, Popup, Polygon, Polyline, Tooltip } from 'react-leaflet';
 
 import * as sites from './sites';

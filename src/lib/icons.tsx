@@ -11,7 +11,7 @@ const iconPriority = [
   'coral-structure',
   'uvc',
   'uvc-survey',
-  'ff-survey',
+  'fish-family-survey',
   'mpa',
   'fishing-ground',
   'dive-site',
@@ -109,7 +109,7 @@ const tagIcons = {
   'coral-structure': coral,
   'coral': coral,
   'uvc-survey': uvc,
-  'ff-survey': uvc,
+  'fish-family-survey': uvc,
   'landmark': binoculars,
   'mpa': mpa,
   'fishing-ground': fishing,
@@ -155,8 +155,6 @@ export const chooseIcon = (site, point?) => {
   switch (icon) {
     case 'landmark':
       return binoculars;
-    case 'table':
-      return table;
     case 'rd':
       return rd;
     case 'buoy':
