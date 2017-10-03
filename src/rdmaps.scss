@@ -1,44 +1,5 @@
-$logoHeight: 54px;
-$headerVPadding: 10px;
-$headerHPadding: 20px;
-
-:export {
-  rdLime: #88bd23;
-  rdGreen: #007e31;
-  rdBaby: #01b5e5;
-}
-
-html, body {
+#app, #app > main {
   height: 100%;
-}
-
-body {
-  font-family: sans-serif;
-  padding: 0;
-  margin: 0;
-  background: #fff;
-}
-
-header {
-  padding: $headerVPadding $headerHPadding;
-
-  > div {
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  > .logo {
-    background: url('assets/logo.svg') 0 0 / 54px 54px no-repeat;
-    width: 54px;
-    height: 54px;
-  }
-
-  > .logo-text {
-    background: url('assets/logo-text.svg') no-repeat;
-    float: right;
-    width: 318px;
-    height: 52px;
-  }
 }
 
 div.coords {
@@ -76,20 +37,6 @@ div.coords {
 }
 
 @media(max-width: 500px) {
-  header {
-    padding: $headerVPadding/2 $headerHPadding/2;
-
-    > .logo-text {
-      display: none;
-    }
-
-    > .logo {
-      background-size: 30px 30px;
-      width: 30px;
-      height: 30px;
-    }
-  }
-
   #mapContainer {
     //height: calc(100% - $logoHeight = (2 * $headerVPadding));
     height: calc(100% - 40px);

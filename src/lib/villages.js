@@ -1,0 +1,9 @@
+export const amboboake = require('../../../rddata/villages/amboboake.json');
+export const ambolomailake = require('../../../rddata/villages/ambolomailake.json');
+export const andrevo = require('../../../rddata/villages/andrevo.json');
+export const belitsake = require('../../../rddata/villages/belitsake.json');
+export const beravy = require('../../../rddata/villages/beravy.json');
+export const fitsitika = require('../../../rddata/villages/fitsitika.json');
+export const ifaty = require('../../../rddata/villages/ifaty.json');
+export const mangily = require('../../../rddata/villages/mangily.json');
+export const manombo = require('../../../rddata/villages/manombo.json');
