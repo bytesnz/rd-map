@@ -23,8 +23,8 @@ const iconPriority = [
 export const yellowBuoy = Leaflet.icon({
   iconUrl: require('../assets/buoy.svg'),
   iconSize: [19, 19],
-  iconAnchor: [9.5, 9.5],
-  popupAnchor: [0, -9.5]
+  iconAnchor: [9.5, 19],
+  popupAnchor: [0, -19]
 });
 
 export const whiteBuoy = Leaflet.icon({
@@ -37,8 +37,8 @@ export const whiteBuoy = Leaflet.icon({
 export const redBuoy = Leaflet.icon({
   iconUrl: require('../assets/rbuoy.svg'),
   iconSize: [19, 19],
-  iconAnchor: [9.5, 9.5],
-  popupAnchor: [0, -9.5]
+  iconAnchor: [9.5, 19],
+  popupAnchor: [0, -19]
 });
 
 export const dive = Leaflet.icon({
