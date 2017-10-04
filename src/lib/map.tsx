@@ -66,6 +66,13 @@ export class RDMap extends React.Component {
         data: Object.assign({}, this.state.data, { sites })
       });
     });
+
+    require.ensure('./projects', () => {
+      const projects = require('./projects');
+      this.setState({
+        data: Object.assign({}, this.state.data, { projects })
+      });
+    });
   }
 
   render() {

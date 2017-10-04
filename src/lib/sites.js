@@ -60,5 +60,3 @@ export const vato_be = require('../../../rddata/sites/vato-be.json');
 export const vato_soa = require('../../../rddata/sites/vato-soa.json');
 export const yan3 = require('../../../rddata/sites/yan3.json');
 export const zalahy = require('../../../rddata/sites/zalahy.json');
-export const artificial_reef_project = require('../../../rddata/projects/artificial-reef.json');
-export const coral = require('../../../rddata/projects/coral.json');

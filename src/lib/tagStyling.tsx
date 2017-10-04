@@ -30,8 +30,8 @@ export const yellowBuoy = Leaflet.icon({
 export const whiteBuoy = Leaflet.icon({
   iconUrl: require('../assets/wbuoy.svg'),
   iconSize: [19, 19],
-  iconAnchor: [9.5, 9.5],
-  popupAnchor: [0, -9.5]
+  iconAnchor: [9.5, 19],
+  popupAnchor: [0, -19]
 });
 
 export const redBuoy = Leaflet.icon({
@@ -111,6 +111,20 @@ export const home = Leaflet.icon({
   popupAnchor: [0, -10]
 });
 
+export const rebar = Leaflet.icon({
+  iconUrl: require('../assets/rebar.svg'),
+  iconSize: [20, 20],
+  iconAnchor: [10, 20],
+  popupAnchor: [0, -20]
+});
+
+export const sensor = Leaflet.icon({
+  iconUrl: require('../assets/sensor.svg'),
+  iconSize: [20, 17],
+  iconAnchor: [10, 8.5],
+  popupAnchor: [0, -8.5]
+});
+
 const styling = {
   uvc: {
     icon: uvc
@@ -154,6 +168,10 @@ const styling = {
   },
   village: {
     icon: home
+  },
+  'seagrass-survey': {
+    weight: 3,
+    color: '#188918'
   }
 };
 
@@ -185,7 +203,7 @@ export const chooseColor = (site, point?) => {
     tags = tags.concat(site.tags)
   }
 
-  const colorTag = tags.find((tag) => typeof styling[tag].color !== 'undefined');
+  const colorTag = tags.find((tag) => styling[tag] && typeof styling[tag].color !== 'undefined');
 
   return colorTag ? styling[colorTag].color : '#3388ff';
 };
@@ -239,6 +257,10 @@ export const chooseIcon = (site, point?) => {
       return anchor;
     case 'red':
       return redBuoy;
+    case 'rebar':
+      return rebar;
+    case 'sensor':
+      return sensor;
   }
 
   return whiteBuoy;

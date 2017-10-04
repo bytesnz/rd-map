@@ -1,11 +1,12 @@
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let package = require('./package.json');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: './src/index.tsx',
   output: {
-    path: './dist',
+    path: path.join(__dirname, './dist'),
     filename: 'app.js',
   },
   devtool: 'source-map',
@@ -34,8 +35,8 @@ module.exports = {
       {
         test: /\.(css|scss|sass)$/,
         loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: ['css-loader', 'postcss-loader', 'sass-loader']
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader', 'sass-loader']
         })/*,
         options: {
           plugins: function() {
