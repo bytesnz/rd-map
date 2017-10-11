@@ -46,7 +46,6 @@ export const riakapombo = require('../../../rddata/sites/riakapombo.json');
 export const rose_andrevo = require('../../../rddata/sites/rose-andrevo.json');
 export const rose_garden = require('../../../rddata/sites/rose-garden.json');
 export const sea_stars = require('../../../rddata/sites/sea-stars.json');
-export const seaweed = require('../../../rddata/sites/seaweed.json');
 export const snapper_point = require('../../../rddata/sites/snapper-point.json');
 export const south_fad_1 = require('../../../rddata/sites/south-fad-1.json');
 export const south_of_faux_pass = require('../../../rddata/sites/south-of-faux-pass.json');

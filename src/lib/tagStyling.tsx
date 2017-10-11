@@ -17,7 +17,8 @@ const iconPriority = [
   'dive-site',
   'evac-point',
   'base',
-  'village'
+  'village',
+  'anchor'
 ];
 
 export const yellowBuoy = Leaflet.icon({
@@ -172,6 +173,10 @@ const styling = {
   'seagrass-survey': {
     weight: 3,
     color: '#188918'
+  },
+  seaweed: {
+    weight: 3,
+    color: '#e3ba15'
   }
 };
 
