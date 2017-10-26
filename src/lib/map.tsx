@@ -40,8 +40,8 @@ export class RDMap extends React.Component {
   public state = {
     data: {}
   };
-  constructor(props, context, updater) {
-    super(props, context, updater);
+  constructor(props, context) {
+    super(props, context);
 
     require.ensure('./villages', () => {
       const villages = require('./villages');

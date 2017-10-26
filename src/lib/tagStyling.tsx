@@ -153,6 +153,9 @@ const styling = {
     weight: 3,
     color: '#ff0'
   },
+  fishing: {
+    icon: 'fishing'
+  },
   'fishing-ground': {
     icon: fishing,
     weight: 1,
@@ -266,6 +269,8 @@ export const chooseIcon = (site, point?) => {
       return rebar;
     case 'sensor':
       return sensor;
+    case 'fishing':
+      return fishing;
   }
 
   return whiteBuoy;
