@@ -161,6 +161,11 @@ const styling = {
     weight: 1,
     color: '#999'
   },
+  'coral': {
+    icon: fishing,
+    weight: 1,
+    color: '#d1a449'
+  },
   'dive-site': {
     icon: dive
   },
