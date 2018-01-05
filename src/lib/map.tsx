@@ -43,14 +43,14 @@ export class RDMap extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    require.ensure('./villages', () => {
+    require.ensure(['./villages'], () => {
       const villages = require('./villages');
       this.setState({
         data: Object.assign({}, this.state.data, { villages })
       });
     });
 
-    require.ensure('./fishing-grounds', () => {
+    require.ensure(['./fishing-grounds'], () => {
       let grounds = require('./fishing-grounds');
       for (const g in grounds) {
         grounds[g].tags = ['fishing-ground'];
@@ -60,14 +60,14 @@ export class RDMap extends React.Component {
       });
     });
 
-    require.ensure('./sites', () => {
+    require.ensure(['./sites'], () => {
       const sites = require('./sites');
       this.setState({
         data: Object.assign({}, this.state.data, { sites })
       });
     });
 
-    require.ensure('./projects', () => {
+    require.ensure(['./projects'], () => {
       const projects = require('./projects');
       this.setState({
         data: Object.assign({}, this.state.data, { projects })

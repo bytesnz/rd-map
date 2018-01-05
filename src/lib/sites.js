@@ -1,7 +1,6 @@
 export const akarampona = require('../../../rddata/sites/akarampona.json');
 export const ambatafia = require('../../../rddata/sites/ambatafia.json');
 export const andabotira = require('../../../rddata/sites/andabotira.json');
-export const ankandava = require('../../../rddata/sites/ankandava.json');
 export const ankarabory = require('../../../rddata/sites/ankarabory.json');
 export const ankarambe = require('../../../rddata/sites/ankarambe.json');
 export const ankarambory = require('../../../rddata/sites/ankarambory.json');
@@ -37,6 +36,7 @@ export const north_pass = require('../../../rddata/sites/north-pass.json');
 export const nosy_foty = require('../../../rddata/sites/nosy-foty.json');
 export const nosy_nantseraka = require('../../../rddata/sites/nosy-nantseraka.json');
 export const oasis = require('../../../rddata/sites/oasis.json');
+export const openwater_2_3 = require('../../../rddata/sites/openwater-2-3.json');
 export const picnic = require('../../../rddata/sites/picnic.json');
 export const piscine = require('../../../rddata/sites/piscine.json');
 export const pooky = require('../../../rddata/sites/pooky.json');

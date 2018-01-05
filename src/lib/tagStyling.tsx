@@ -9,6 +9,7 @@ declare function require(string): string;
 const iconPriority = [
   'coral-table',
   'coral-structure',
+  'collection',
   'uvc',
   'uvc-survey',
   'fish-family-survey',
@@ -161,8 +162,7 @@ const styling = {
     weight: 1,
     color: '#999'
   },
-  'coral': {
-    icon: fishing,
+  outcrop: {
     weight: 1,
     color: '#d1a449'
   },
@@ -185,6 +185,9 @@ const styling = {
   seaweed: {
     weight: 3,
     color: '#e3ba15'
+  },
+  collection: {
+    icon: rebar
   }
 };
 

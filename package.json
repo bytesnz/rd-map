@@ -10,13 +10,12 @@
   },
   "author": "Jack Farley <bytesnz>",
   "license": "GPL-3.0",
-  "dependencies": {
+  "devDependencies": {
     "apeman-react-markdown": "^2.0.1",
     "magellan-coords": "^1.1.0",
-    "react-marked-markdown": "^1.4.3"
-  },
-  "devDependencies": {
+    "react-marked-markdown": "^1.4.3",
     "@types/react": "^16.0.10",
+    "@types/webpack-env": "^1.13.3",
     "awesome-typescript-loader": "^3.2.3",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^2.0.0",
