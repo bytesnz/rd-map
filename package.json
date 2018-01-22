@@ -5,15 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack -w",
-    "prod": "webpack -p"
+    "dev": "webpack --config webpack.dev.js -w",
+    "prod": "webpack --config webpack.prod.js -p"
   },
   "author": "Jack Farley <bytesnz>",
   "license": "GPL-3.0",
   "devDependencies": {
-    "apeman-react-markdown": "^2.0.1",
-    "magellan-coords": "^1.1.0",
-    "react-marked-markdown": "^1.4.3",
     "@types/react": "^16.0.10",
     "@types/webpack-env": "^1.13.3",
     "awesome-typescript-loader": "^3.2.3",
@@ -31,12 +28,16 @@
     "react-dom": "^15.6.1",
     "react-leaflet": "^1.4.0",
     "react-leaflet-draw": "^0.16.0",
+    "react-marked-markdown": "^1.4.3",
     "sass-loader": "^6.0.6",
     "source-map-loader": "^0.2.1",
     "style-loader": "0.13.1",
     "ts-loader": "^2.3.2",
     "typescript": "^2.5.3",
+    "uglifyjs-webpack-plugin": "^1.1.6",
     "url-loader": "^0.5.7",
-    "webpack": "^2.2.0"
+    "webpack": "^2.2.0",
+    "webpack-bundle-analyzer": "^2.9.2",
+    "webpack-merge": "^4.1.1"
   }
 }

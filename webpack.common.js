@@ -2,6 +2,7 @@ let HtmlWebpackPlugin = require('html-webpack-plugin');
 let package = require('./package.json');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: './src/index.tsx',
@@ -11,7 +12,10 @@ module.exports = {
   },
   devtool: 'source-map',
   resolve: {
-    extensions: [ '.tsx', '.ts', '.jsx', '.js', '.json', '.scss', '.sass', '.css' ]
+    extensions: [ '.tsx', '.ts', '.jsx', '.js', '.json', '.scss', '.sass', '.css' ],
+    alias: {
+      'highlight.js': path.join(__dirname, '/fakeModule.js')
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -19,7 +23,8 @@ module.exports = {
       template: 'src/index.ejs',
       chunksSortMode: 'dependency'
     }),
-    new ExtractTextPlugin('app.css')
+    new ExtractTextPlugin('app.css'),
+    new BundleAnalyzerPlugin()
   ],
   module: {
     rules: [
